@@ -17,7 +17,10 @@ module.exports = {
     filename: "[name].bundle.js",
     clean: true,
   },
-  devtool: "eval-cheap-module-source-map",
+  // Tradeoff choice for development builds.
+  // devtool: "eval-cheap-module-source-map",
+  // Recommended choice for development builds with high quality SourceMaps.
+  devtool: "eval-source-map",
   devServer: {
     static: path.join(__dirname, "../build"),
     compress: true,
