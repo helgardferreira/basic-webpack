@@ -1,11 +1,10 @@
-import join from "lodash/join";
 import printMe from "./print";
 
 function component() {
   const element = document.createElement("div");
   const btn = document.createElement("button");
 
-  element.innerHTML = join(["Hello", "webpack"], " ");
+  element.innerHTML = "Hello webpack!";
 
   btn.innerHTML = "Click me and check the console!";
   btn.onclick = printMe;
