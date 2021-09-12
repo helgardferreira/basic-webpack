@@ -6,17 +6,13 @@ const yaml = require("yamljs");
 const json5 = require("json5");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: {
     index: "./src/index.js",
-    print: "./src/print.js",
   },
-  output: {
-    publicPath: "./",
-    path: path.resolve(__dirname, "dist"),
-    // filename: "[name].[contenthash].bundle.js",
-    filename: "[name].bundle.js",
-    clean: true,
+  devtool: "inline-source-map",
+  devServer: {
+    static: "./dist",
   },
   module: {
     rules: [
@@ -68,4 +64,11 @@ module.exports = {
       title: "Webpack Example",
     }),
   ],
+  output: {
+    // publicPath: "/",
+    path: path.resolve(__dirname, "../dist"),
+    // filename: "[name].[contenthash].bundle.js",
+    filename: "[name].bundle.js",
+    clean: true,
+  },
 };
