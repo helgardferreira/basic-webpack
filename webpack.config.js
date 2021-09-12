@@ -1,16 +1,22 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const toml = require("toml");
 const yaml = require("yamljs");
 const json5 = require("json5");
 
 module.exports = {
-  entry: "./src/index.js",
   mode: "production",
+  entry: {
+    index: "./src/index.js",
+    print: "./src/print.js",
+  },
   output: {
     publicPath: "./",
     path: path.resolve(__dirname, "dist"),
     // filename: "[name].[contenthash].bundle.js",
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
+    clean: true,
   },
   module: {
     rules: [
@@ -57,4 +63,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Webpack Example",
+    }),
+  ],
 };
