@@ -8,14 +8,31 @@ const json5 = require("json5");
 module.exports = {
   mode: "development",
   entry: {
-    index: "./src/index.js",
+    main: "./src/index.js",
   },
-  devtool: "inline-source-map",
+  output: {
+    // publicPath: "/",
+    path: path.resolve(__dirname, "../build"),
+    // filename: "[name].[contenthash].bundle.js",
+    filename: "[name].bundle.js",
+    clean: true,
+  },
+  devtool: "eval-cheap-module-source-map",
   devServer: {
-    static: "./dist",
+    static: path.join(__dirname, "../build"),
+    compress: true,
+    port: 3000,
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          // transpiling our JavaScript files using Babel and webpack
+          loader: "babel-loader",
+        },
+      },
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
@@ -61,14 +78,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Webpack Example",
+      template: "./src/index.html",
+      filename: "index.html",
     }),
   ],
-  output: {
-    // publicPath: "/",
-    path: path.resolve(__dirname, "../dist"),
-    // filename: "[name].[contenthash].bundle.js",
-    filename: "[name].bundle.js",
-    clean: true,
-  },
 };
